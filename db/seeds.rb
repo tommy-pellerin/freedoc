@@ -17,13 +17,17 @@ require 'faker'
 #   patient = Patient.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)  
 # end
 
-doctors = Doctor.all
-patients = Patient.all
+# doctors = Doctor.all
+# patients = Patient.all
 
-200.times do
-  random_doctor_index = Random.new.rand(doctors.length)
-  random_patient_index = Random.new.rand(patients.length)
-  appointment = Appointment.create!(date: Faker::Date.between(from: '2024-02-01', to: '2024-02-29'), doctor: doctors[random_doctor_index.to_i], patient: patients[random_patient_index.to_i])
+# 200.times do
+#   random_doctor_index = Random.new.rand(doctors.length)
+#   random_patient_index = Random.new.rand(patients.length)
+#   appointment = Appointment.create!(date: Faker::Date.between(from: '2024-02-01', to: '2024-02-29'), doctor: doctors[random_doctor_index.to_i], patient: patients[random_patient_index.to_i])
   
+# end
+appointments = Appointment.all
+100.times do
+  ap = appointments.sample
+  city = City.create!(name: Faker::Address.city, doctor: ap.doctor ,patient: ap.patient, appointment: ap) 
 end
-
