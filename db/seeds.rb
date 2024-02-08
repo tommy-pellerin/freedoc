@@ -24,10 +24,26 @@ require 'faker'
 #   random_doctor_index = Random.new.rand(doctors.length)
 #   random_patient_index = Random.new.rand(patients.length)
 #   appointment = Appointment.create!(date: Faker::Date.between(from: '2024-02-01', to: '2024-02-29'), doctor: doctors[random_doctor_index.to_i], patient: patients[random_patient_index.to_i])
-  
 # end
-appointments = Appointment.all
-100.times do
-  ap = appointments.sample
-  city = City.create!(name: Faker::Address.city, doctor: ap.doctor ,patient: ap.patient, appointment: ap) 
+
+#City
+# appointments = Appointment.all
+# 100.times do
+#   ap = appointments.sample
+#   city = City.create!(name: Faker::Address.city, doctor: ap.doctor ,patient: ap.patient, appointment: ap) 
+# end
+
+#Spécialité
+100.times do |i|
+  specialty = Specialty.create!(name: Faker::Superhero.power)  
+end
+
+doctors = Doctor.all
+specialties = Specialty.all
+
+50.times do
+  random_doctor_index = Random.new.rand(doctors.length)
+  random_specialty_index = Random.new.rand(specialties.length)
+  
+  join = JoinTableSpecialtyDoctor.create!(doctor: doctors[random_doctor_index.to_i], specialty: specialties[random_specialty_index.to_i])
 end
